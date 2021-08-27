@@ -3,11 +3,12 @@
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------
 # Import functions script
+import tic_tac_toe_functions as fun
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------
 # Request info about players
-player_one = "Lucas"
-player_two = "Betina"
+player_one = ""
+player_two = ""
 
 while player_one == "":
     player_one = input("Name of player one: ")
@@ -20,6 +21,7 @@ while player_two == "":
 
 p_one_sel = [] #selections of player one (starts empty)
 p_two_sel = [] #selections of player two (starts empty)
+selections = [" ", " "," ", " "," ", " ", " ", " ", " "] #all selections are, at first, empty
 available = [1, 2, 3, 4, 5, 6, 7, 8, 9] #at first, all numbers are available for being chosen
 
 p_one_turn = True #Starts with player one's turn. When it is False, it's player two's turn
@@ -37,31 +39,42 @@ while game_over == False:
     if p_one_turn == True: #player one's turn
         while valid_selection == False:
             try:
-                selected = int(input("{}, what number is your choice? ".format(player_one)))
+                selected = int(input("{}, what number is your choice? Available numbers are {}: ".format(player_one, available)))
                 if selected in available:
                     valid_selection = True
                     available.remove(selected)
                     p_one_sel.append(selected)
-                    print(available)
-                    print(p_one_sel)
+                    selections[selected - 1] = "X"
+                    fun.print_grid(selections)
+
+                    if fun.check_win(p_one_sel):
+                        print("Congratulations, {}, you won the game!\n".format(player_one))
+                        game_over = True
+                        break
             except ValueError:
                 continue
     else: #player two's turn
         while valid_selection == False:
             try:
-                selected = int(input("{}, what number is your choice? ".format(player_two)))
+                selected = int(input("{}, what number is your choice? Available numbers are {}: ".format(player_two, available)))
                 if selected in available:
                     valid_selection = True
                     available.remove(selected)
                     p_two_sel.append(selected)
-                    print(available)
-                    print(p_two_sel)
+                    selections[selected - 1] = "O"
+                    fun.print_grid(selections)
+
+                    if fun.check_win(p_two_sel):
+                        print("Congratulations, {}, you won the game!\n".format(player_two))
+                        game_over = True
+                        break
+
             except ValueError:
                 continue
-    print("moving on")
+
     valid_selection = False
     p_one_turn = not p_one_turn
-
-    # ---------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Check if current play won the game
     
+    if len(available) == 0: #If nobody won the game, it's a tie!
+        print("Oh, it's a tie!")
+        break
