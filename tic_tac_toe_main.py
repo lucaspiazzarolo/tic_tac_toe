@@ -28,7 +28,7 @@ p_one_turn = True #Starts with player one's turn. When it is False, it's player 
 valid_selection = False #shows if a selection is valid or not
 
 game_over = False #game isn't over yet
-
+fun.print_grid(selections) #print grid before first play
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------
 # Loop that will move through plays
 
@@ -36,10 +36,11 @@ while game_over == False:
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------
     # Ask for current player input
 
+
     if p_one_turn == True: #player one's turn
         while valid_selection == False:
             try:
-                selected = int(input("{}, what number is your choice? Available numbers are {}: ".format(player_one, available)))
+                selected = int(input("{}, what number is your choice? ".format(player_one)))
                 if selected in available:
                     valid_selection = True
                     available.remove(selected)
@@ -56,7 +57,7 @@ while game_over == False:
     else: #player two's turn
         while valid_selection == False:
             try:
-                selected = int(input("{}, what number is your choice? Available numbers are {}: ".format(player_two, available)))
+                selected = int(input("{}, what number is your choice? ".format(player_two)))
                 if selected in available:
                     valid_selection = True
                     available.remove(selected)
