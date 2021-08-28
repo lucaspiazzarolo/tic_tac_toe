@@ -21,7 +21,7 @@ while player_two == "":
 
 p_one_sel = [] #selections of player one (starts empty)
 p_two_sel = [] #selections of player two (starts empty)
-selections = [" ", " "," ", " "," ", " ", " ", " ", " "] #all selections are, at first, empty
+selections = ["1", "2","3", "4","5", "6", "7", "8", "9"] #all selections are, at first, empty
 available = [1, 2, 3, 4, 5, 6, 7, 8, 9] #at first, all numbers are available for being chosen
 
 p_one_turn = True #Starts with player one's turn. When it is False, it's player two's turn
